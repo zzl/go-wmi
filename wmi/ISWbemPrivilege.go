@@ -1,14 +1,14 @@
 package wmi
 
 import (
-	"github.com/zzl/go-win32api/win32"
+	"github.com/zzl/go-win32api/v2/win32"
 	"github.com/zzl/go-com/com"
 	"github.com/zzl/go-com/ole"
 	"syscall"
 )
 
 // 26EE67BD-5804-11D2-8B4A-00600806D9B6
-var IID_ISWbemPrivilege = syscall.GUID{0x26EE67BD, 0x5804, 0x11D2, 
+var IID_ISWbemPrivilege = syscall.GUID{0x26EE67BD, 0x5804, 0x11D2,
 	[8]byte{0x8B, 0x4A, 0x00, 0x60, 0x08, 0x06, 0xD9, 0xB6}}
 
 type ISWbemPrivilege struct {
@@ -16,8 +16,8 @@ type ISWbemPrivilege struct {
 }
 
 func NewISWbemPrivilege(pDisp *win32.IDispatch, addRef bool, scoped bool) *ISWbemPrivilege {
-	 if pDisp == nil {
-		return nil;
+	if pDisp == nil {
+		return nil
 	}
 	p := &ISWbemPrivilege{ole.OleClient{pDisp}}
 	if addRef {
@@ -49,7 +49,7 @@ func (this *ISWbemPrivilege) IsEnabled() bool {
 	return retVal.BoolValVal() != win32.VARIANT_FALSE
 }
 
-func (this *ISWbemPrivilege) SetIsEnabled(rhs bool)  {
+func (this *ISWbemPrivilege) SetIsEnabled(rhs bool) {
 	_ = this.PropPut(0x00000000, []interface{}{rhs})
 }
 

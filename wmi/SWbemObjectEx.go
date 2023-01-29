@@ -1,14 +1,14 @@
 package wmi
 
 import (
-	"github.com/zzl/go-win32api/win32"
+	"github.com/zzl/go-win32api/v2/win32"
 	"github.com/zzl/go-com/com"
 	"github.com/zzl/go-com/ole"
 	"syscall"
 	"unsafe"
 )
 
-var CLSID_SWbemObjectEx = syscall.GUID{0xD6BDAFB2, 0x9435, 0x491F, 
+var CLSID_SWbemObjectEx = syscall.GUID{0xD6BDAFB2, 0x9435, 0x491F,
 	[8]byte{0xBB, 0x87, 0x6A, 0xA0, 0xF0, 0xBC, 0x31, 0xA2}}
 
 type SWbemObjectEx struct {
@@ -16,8 +16,8 @@ type SWbemObjectEx struct {
 }
 
 func NewSWbemObjectEx(pDisp *win32.IDispatch, addRef bool, scoped bool) *SWbemObjectEx {
-	 if pDisp == nil {
-		return nil;
+	if pDisp == nil {
+		return nil
 	}
 	p := &SWbemObjectEx{ISWbemObjectEx{ole.OleClient{pDisp}}}
 	if addRef {
@@ -35,7 +35,7 @@ func NewSWbemObjectExFromVar(v ole.Variant, addRef bool, scoped bool) *SWbemObje
 
 func NewSWbemObjectExInstance(scoped bool) (*SWbemObjectEx, error) {
 	var p *win32.IDispatch
-	hr := win32.CoCreateInstance(&CLSID_SWbemObjectEx, nil, 
+	hr := win32.CoCreateInstance(&CLSID_SWbemObjectEx, nil,
 		win32.CLSCTX_INPROC_SERVER|win32.CLSCTX_LOCAL_SERVER,
 		&IID_ISWbemObjectEx, unsafe.Pointer(&p))
 	if win32.FAILED(hr) {

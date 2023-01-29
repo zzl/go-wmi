@@ -1,7 +1,7 @@
 package wmi
 
 import (
-	"github.com/zzl/go-win32api/win32"
+	"github.com/zzl/go-win32api/v2/win32"
 	"github.com/zzl/go-com/com"
 	"github.com/zzl/go-com/ole"
 	"syscall"
@@ -9,7 +9,7 @@ import (
 )
 
 // CF2376EA-CE8C-11D1-8B05-00600806D9B6
-var IID_ISWbemNamedValueSet = syscall.GUID{0xCF2376EA, 0xCE8C, 0x11D1, 
+var IID_ISWbemNamedValueSet = syscall.GUID{0xCF2376EA, 0xCE8C, 0x11D1,
 	[8]byte{0x8B, 0x05, 0x00, 0x60, 0x08, 0x06, 0xD9, 0xB6}}
 
 type ISWbemNamedValueSet struct {
@@ -17,8 +17,8 @@ type ISWbemNamedValueSet struct {
 }
 
 func NewISWbemNamedValueSet(pDisp *win32.IDispatch, addRef bool, scoped bool) *ISWbemNamedValueSet {
-	 if pDisp == nil {
-		return nil;
+	if pDisp == nil {
+		return nil
 	}
 	p := &ISWbemNamedValueSet{ole.OleClient{pDisp}}
 	if addRef {
@@ -54,7 +54,7 @@ func (this *ISWbemNamedValueSet) ForEach(action func(item *ISWbemNamedValue) boo
 	pEnum := this.NewEnum_()
 	var pEnumVar *win32.IEnumVARIANT
 	pEnum.QueryInterface(&win32.IID_IEnumVARIANT, unsafe.Pointer(&pEnumVar))
-	defer pEnumVar.Release();
+	defer pEnumVar.Release()
 	for {
 		var c uint32
 		var v ole.Variant
@@ -71,8 +71,8 @@ func (this *ISWbemNamedValueSet) ForEach(action func(item *ISWbemNamedValue) boo
 	}
 }
 
-var ISWbemNamedValueSet_Item_OptArgs= []string{
-	"iFlags", 
+var ISWbemNamedValueSet_Item_OptArgs = []string{
+	"iFlags",
 }
 
 func (this *ISWbemNamedValueSet) Item(strName string, optArgs ...interface{}) *ISWbemNamedValue {
@@ -86,8 +86,8 @@ func (this *ISWbemNamedValueSet) Count() int32 {
 	return retVal.LValVal()
 }
 
-var ISWbemNamedValueSet_Add_OptArgs= []string{
-	"iFlags", 
+var ISWbemNamedValueSet_Add_OptArgs = []string{
+	"iFlags",
 }
 
 func (this *ISWbemNamedValueSet) Add(strName string, varValue *ole.Variant, optArgs ...interface{}) *ISWbemNamedValue {
@@ -96,14 +96,14 @@ func (this *ISWbemNamedValueSet) Add(strName string, varValue *ole.Variant, optA
 	return NewISWbemNamedValue(retVal.IDispatch(), false, true)
 }
 
-var ISWbemNamedValueSet_Remove_OptArgs= []string{
-	"iFlags", 
+var ISWbemNamedValueSet_Remove_OptArgs = []string{
+	"iFlags",
 }
 
-func (this *ISWbemNamedValueSet) Remove(strName string, optArgs ...interface{})  {
+func (this *ISWbemNamedValueSet) Remove(strName string, optArgs ...interface{}) {
 	optArgs = ole.ProcessOptArgs(ISWbemNamedValueSet_Remove_OptArgs, optArgs)
 	retVal, _ := this.Call(0x00000003, []interface{}{strName}, optArgs...)
-	_= retVal
+	_ = retVal
 }
 
 func (this *ISWbemNamedValueSet) Clone() *ISWbemNamedValueSet {
@@ -111,8 +111,8 @@ func (this *ISWbemNamedValueSet) Clone() *ISWbemNamedValueSet {
 	return NewISWbemNamedValueSet(retVal.IDispatch(), false, true)
 }
 
-func (this *ISWbemNamedValueSet) DeleteAll()  {
+func (this *ISWbemNamedValueSet) DeleteAll() {
 	retVal, _ := this.Call(0x00000005, nil)
-	_= retVal
+	_ = retVal
 }
 

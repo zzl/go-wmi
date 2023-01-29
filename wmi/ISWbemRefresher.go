@@ -1,7 +1,7 @@
 package wmi
 
 import (
-	"github.com/zzl/go-win32api/win32"
+	"github.com/zzl/go-win32api/v2/win32"
 	"github.com/zzl/go-com/com"
 	"github.com/zzl/go-com/ole"
 	"syscall"
@@ -9,7 +9,7 @@ import (
 )
 
 // 14D8250E-D9C2-11D3-B38F-00105A1F473A
-var IID_ISWbemRefresher = syscall.GUID{0x14D8250E, 0xD9C2, 0x11D3, 
+var IID_ISWbemRefresher = syscall.GUID{0x14D8250E, 0xD9C2, 0x11D3,
 	[8]byte{0xB3, 0x8F, 0x00, 0x10, 0x5A, 0x1F, 0x47, 0x3A}}
 
 type ISWbemRefresher struct {
@@ -17,8 +17,8 @@ type ISWbemRefresher struct {
 }
 
 func NewISWbemRefresher(pDisp *win32.IDispatch, addRef bool, scoped bool) *ISWbemRefresher {
-	 if pDisp == nil {
-		return nil;
+	if pDisp == nil {
+		return nil
 	}
 	p := &ISWbemRefresher{ole.OleClient{pDisp}}
 	if addRef {
@@ -54,7 +54,7 @@ func (this *ISWbemRefresher) ForEach(action func(item *ISWbemRefreshableItem) bo
 	pEnum := this.NewEnum_()
 	var pEnumVar *win32.IEnumVARIANT
 	pEnum.QueryInterface(&win32.IID_IEnumVARIANT, unsafe.Pointer(&pEnumVar))
-	defer pEnumVar.Release();
+	defer pEnumVar.Release()
 	for {
 		var c uint32
 		var v ole.Variant
@@ -81,8 +81,8 @@ func (this *ISWbemRefresher) Count() int32 {
 	return retVal.LValVal()
 }
 
-var ISWbemRefresher_Add_OptArgs= []string{
-	"iFlags", "objWbemNamedValueSet", 
+var ISWbemRefresher_Add_OptArgs = []string{
+	"iFlags", "objWbemNamedValueSet",
 }
 
 func (this *ISWbemRefresher) Add(objWbemServices *ISWbemServicesEx, bsInstancePath string, optArgs ...interface{}) *ISWbemRefreshableItem {
@@ -91,8 +91,8 @@ func (this *ISWbemRefresher) Add(objWbemServices *ISWbemServicesEx, bsInstancePa
 	return NewISWbemRefreshableItem(retVal.IDispatch(), false, true)
 }
 
-var ISWbemRefresher_AddEnum_OptArgs= []string{
-	"iFlags", "objWbemNamedValueSet", 
+var ISWbemRefresher_AddEnum_OptArgs = []string{
+	"iFlags", "objWbemNamedValueSet",
 }
 
 func (this *ISWbemRefresher) AddEnum(objWbemServices *ISWbemServicesEx, bsClassName string, optArgs ...interface{}) *ISWbemRefreshableItem {
@@ -101,24 +101,24 @@ func (this *ISWbemRefresher) AddEnum(objWbemServices *ISWbemServicesEx, bsClassN
 	return NewISWbemRefreshableItem(retVal.IDispatch(), false, true)
 }
 
-var ISWbemRefresher_Remove_OptArgs= []string{
-	"iFlags", 
+var ISWbemRefresher_Remove_OptArgs = []string{
+	"iFlags",
 }
 
-func (this *ISWbemRefresher) Remove(iIndex int32, optArgs ...interface{})  {
+func (this *ISWbemRefresher) Remove(iIndex int32, optArgs ...interface{}) {
 	optArgs = ole.ProcessOptArgs(ISWbemRefresher_Remove_OptArgs, optArgs)
 	retVal, _ := this.Call(0x00000004, []interface{}{iIndex}, optArgs...)
-	_= retVal
+	_ = retVal
 }
 
-var ISWbemRefresher_Refresh_OptArgs= []string{
-	"iFlags", 
+var ISWbemRefresher_Refresh_OptArgs = []string{
+	"iFlags",
 }
 
-func (this *ISWbemRefresher) Refresh(optArgs ...interface{})  {
+func (this *ISWbemRefresher) Refresh(optArgs ...interface{}) {
 	optArgs = ole.ProcessOptArgs(ISWbemRefresher_Refresh_OptArgs, optArgs)
 	retVal, _ := this.Call(0x00000005, nil, optArgs...)
-	_= retVal
+	_ = retVal
 }
 
 func (this *ISWbemRefresher) AutoReconnect() bool {
@@ -126,12 +126,12 @@ func (this *ISWbemRefresher) AutoReconnect() bool {
 	return retVal.BoolValVal() != win32.VARIANT_FALSE
 }
 
-func (this *ISWbemRefresher) SetAutoReconnect(rhs bool)  {
+func (this *ISWbemRefresher) SetAutoReconnect(rhs bool) {
 	_ = this.PropPut(0x00000006, []interface{}{rhs})
 }
 
-func (this *ISWbemRefresher) DeleteAll()  {
+func (this *ISWbemRefresher) DeleteAll() {
 	retVal, _ := this.Call(0x00000007, nil)
-	_= retVal
+	_ = retVal
 }
 

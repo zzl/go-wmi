@@ -1,14 +1,14 @@
 package wmi
 
 import (
-	"github.com/zzl/go-win32api/win32"
 	"github.com/zzl/go-com/com"
 	"github.com/zzl/go-com/ole"
+	"github.com/zzl/go-win32api/v2/win32"
 	"syscall"
 )
 
 // 76A64164-CB41-11D1-8B02-00600806D9B6
-var IID_ISWbemNamedValue = syscall.GUID{0x76A64164, 0xCB41, 0x11D1, 
+var IID_ISWbemNamedValue = syscall.GUID{0x76A64164, 0xCB41, 0x11D1,
 	[8]byte{0x8B, 0x02, 0x00, 0x60, 0x08, 0x06, 0xD9, 0xB6}}
 
 type ISWbemNamedValue struct {
@@ -16,8 +16,8 @@ type ISWbemNamedValue struct {
 }
 
 func NewISWbemNamedValue(pDisp *win32.IDispatch, addRef bool, scoped bool) *ISWbemNamedValue {
-	 if pDisp == nil {
-		return nil;
+	if pDisp == nil {
+		return nil
 	}
 	p := &ISWbemNamedValue{ole.OleClient{pDisp}}
 	if addRef {
@@ -50,7 +50,7 @@ func (this *ISWbemNamedValue) Value() ole.Variant {
 	return *retVal
 }
 
-func (this *ISWbemNamedValue) SetValue(rhs *ole.Variant)  {
+func (this *ISWbemNamedValue) SetValue(rhs *ole.Variant) {
 	_ = this.PropPut(0x00000000, []interface{}{rhs})
 }
 
@@ -58,4 +58,3 @@ func (this *ISWbemNamedValue) Name() string {
 	retVal, _ := this.PropGet(0x00000002, nil)
 	return win32.BstrToStrAndFree(retVal.BstrValVal())
 }
-

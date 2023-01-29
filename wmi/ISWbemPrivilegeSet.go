@@ -1,7 +1,7 @@
 package wmi
 
 import (
-	"github.com/zzl/go-win32api/win32"
+	"github.com/zzl/go-win32api/v2/win32"
 	"github.com/zzl/go-com/com"
 	"github.com/zzl/go-com/ole"
 	"syscall"
@@ -9,7 +9,7 @@ import (
 )
 
 // 26EE67BF-5804-11D2-8B4A-00600806D9B6
-var IID_ISWbemPrivilegeSet = syscall.GUID{0x26EE67BF, 0x5804, 0x11D2, 
+var IID_ISWbemPrivilegeSet = syscall.GUID{0x26EE67BF, 0x5804, 0x11D2,
 	[8]byte{0x8B, 0x4A, 0x00, 0x60, 0x08, 0x06, 0xD9, 0xB6}}
 
 type ISWbemPrivilegeSet struct {
@@ -17,8 +17,8 @@ type ISWbemPrivilegeSet struct {
 }
 
 func NewISWbemPrivilegeSet(pDisp *win32.IDispatch, addRef bool, scoped bool) *ISWbemPrivilegeSet {
-	 if pDisp == nil {
-		return nil;
+	if pDisp == nil {
+		return nil
 	}
 	p := &ISWbemPrivilegeSet{ole.OleClient{pDisp}}
 	if addRef {
@@ -54,7 +54,7 @@ func (this *ISWbemPrivilegeSet) ForEach(action func(item *ISWbemPrivilege) bool)
 	pEnum := this.NewEnum_()
 	var pEnumVar *win32.IEnumVARIANT
 	pEnum.QueryInterface(&win32.IID_IEnumVARIANT, unsafe.Pointer(&pEnumVar))
-	defer pEnumVar.Release();
+	defer pEnumVar.Release()
 	for {
 		var c uint32
 		var v ole.Variant
@@ -81,8 +81,8 @@ func (this *ISWbemPrivilegeSet) Count() int32 {
 	return retVal.LValVal()
 }
 
-var ISWbemPrivilegeSet_Add_OptArgs= []string{
-	"bIsEnabled", 
+var ISWbemPrivilegeSet_Add_OptArgs = []string{
+	"bIsEnabled",
 }
 
 func (this *ISWbemPrivilegeSet) Add(iPrivilege int32, optArgs ...interface{}) *ISWbemPrivilege {
@@ -91,18 +91,18 @@ func (this *ISWbemPrivilegeSet) Add(iPrivilege int32, optArgs ...interface{}) *I
 	return NewISWbemPrivilege(retVal.IDispatch(), false, true)
 }
 
-func (this *ISWbemPrivilegeSet) Remove(iPrivilege int32)  {
+func (this *ISWbemPrivilegeSet) Remove(iPrivilege int32) {
 	retVal, _ := this.Call(0x00000003, []interface{}{iPrivilege})
-	_= retVal
+	_ = retVal
 }
 
-func (this *ISWbemPrivilegeSet) DeleteAll()  {
+func (this *ISWbemPrivilegeSet) DeleteAll() {
 	retVal, _ := this.Call(0x00000004, nil)
-	_= retVal
+	_ = retVal
 }
 
-var ISWbemPrivilegeSet_AddAsString_OptArgs= []string{
-	"bIsEnabled", 
+var ISWbemPrivilegeSet_AddAsString_OptArgs = []string{
+	"bIsEnabled",
 }
 
 func (this *ISWbemPrivilegeSet) AddAsString(strPrivilege string, optArgs ...interface{}) *ISWbemPrivilege {

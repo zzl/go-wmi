@@ -1,14 +1,14 @@
 package wmi
 
 import (
-	"github.com/zzl/go-win32api/win32"
+	"github.com/zzl/go-win32api/v2/win32"
 	"github.com/zzl/go-com/com"
 	"github.com/zzl/go-com/ole"
 	"syscall"
 )
 
 // 1A388F98-D4BA-11D1-8B09-00600806D9B6
-var IID_ISWbemProperty = syscall.GUID{0x1A388F98, 0xD4BA, 0x11D1, 
+var IID_ISWbemProperty = syscall.GUID{0x1A388F98, 0xD4BA, 0x11D1,
 	[8]byte{0x8B, 0x09, 0x00, 0x60, 0x08, 0x06, 0xD9, 0xB6}}
 
 type ISWbemProperty struct {
@@ -16,8 +16,8 @@ type ISWbemProperty struct {
 }
 
 func NewISWbemProperty(pDisp *win32.IDispatch, addRef bool, scoped bool) *ISWbemProperty {
-	 if pDisp == nil {
-		return nil;
+	if pDisp == nil {
+		return nil
 	}
 	p := &ISWbemProperty{ole.OleClient{pDisp}}
 	if addRef {
@@ -50,7 +50,7 @@ func (this *ISWbemProperty) Value() ole.Variant {
 	return *retVal
 }
 
-func (this *ISWbemProperty) SetValue(rhs *ole.Variant)  {
+func (this *ISWbemProperty) SetValue(rhs *ole.Variant) {
 	_ = this.PropPut(0x00000000, []interface{}{rhs})
 }
 

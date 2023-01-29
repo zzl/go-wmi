@@ -1,7 +1,7 @@
 package wmi
 
 import (
-	"github.com/zzl/go-win32api/win32"
+	"github.com/zzl/go-win32api/v2/win32"
 	"github.com/zzl/go-com/com"
 	"github.com/zzl/go-com/ole"
 	"syscall"
@@ -9,7 +9,7 @@ import (
 )
 
 // 5E97458A-CF77-11D3-B38F-00105A1F473A
-var IID_ISWbemDateTime = syscall.GUID{0x5E97458A, 0xCF77, 0x11D3, 
+var IID_ISWbemDateTime = syscall.GUID{0x5E97458A, 0xCF77, 0x11D3,
 	[8]byte{0xB3, 0x8F, 0x00, 0x10, 0x5A, 0x1F, 0x47, 0x3A}}
 
 type ISWbemDateTime struct {
@@ -17,8 +17,8 @@ type ISWbemDateTime struct {
 }
 
 func NewISWbemDateTime(pDisp *win32.IDispatch, addRef bool, scoped bool) *ISWbemDateTime {
-	 if pDisp == nil {
-		return nil;
+	if pDisp == nil {
+		return nil
 	}
 	p := &ISWbemDateTime{ole.OleClient{pDisp}}
 	if addRef {
@@ -50,7 +50,7 @@ func (this *ISWbemDateTime) Value() string {
 	return win32.BstrToStrAndFree(retVal.BstrValVal())
 }
 
-func (this *ISWbemDateTime) SetValue(rhs string)  {
+func (this *ISWbemDateTime) SetValue(rhs string) {
 	_ = this.PropPut(0x00000000, []interface{}{rhs})
 }
 
@@ -59,7 +59,7 @@ func (this *ISWbemDateTime) Year() int32 {
 	return retVal.LValVal()
 }
 
-func (this *ISWbemDateTime) SetYear(rhs int32)  {
+func (this *ISWbemDateTime) SetYear(rhs int32) {
 	_ = this.PropPut(0x00000001, []interface{}{rhs})
 }
 
@@ -68,7 +68,7 @@ func (this *ISWbemDateTime) YearSpecified() bool {
 	return retVal.BoolValVal() != win32.VARIANT_FALSE
 }
 
-func (this *ISWbemDateTime) SetYearSpecified(rhs bool)  {
+func (this *ISWbemDateTime) SetYearSpecified(rhs bool) {
 	_ = this.PropPut(0x00000002, []interface{}{rhs})
 }
 
@@ -77,7 +77,7 @@ func (this *ISWbemDateTime) Month() int32 {
 	return retVal.LValVal()
 }
 
-func (this *ISWbemDateTime) SetMonth(rhs int32)  {
+func (this *ISWbemDateTime) SetMonth(rhs int32) {
 	_ = this.PropPut(0x00000003, []interface{}{rhs})
 }
 
@@ -86,7 +86,7 @@ func (this *ISWbemDateTime) MonthSpecified() bool {
 	return retVal.BoolValVal() != win32.VARIANT_FALSE
 }
 
-func (this *ISWbemDateTime) SetMonthSpecified(rhs bool)  {
+func (this *ISWbemDateTime) SetMonthSpecified(rhs bool) {
 	_ = this.PropPut(0x00000004, []interface{}{rhs})
 }
 
@@ -95,7 +95,7 @@ func (this *ISWbemDateTime) Day() int32 {
 	return retVal.LValVal()
 }
 
-func (this *ISWbemDateTime) SetDay(rhs int32)  {
+func (this *ISWbemDateTime) SetDay(rhs int32) {
 	_ = this.PropPut(0x00000005, []interface{}{rhs})
 }
 
@@ -104,7 +104,7 @@ func (this *ISWbemDateTime) DaySpecified() bool {
 	return retVal.BoolValVal() != win32.VARIANT_FALSE
 }
 
-func (this *ISWbemDateTime) SetDaySpecified(rhs bool)  {
+func (this *ISWbemDateTime) SetDaySpecified(rhs bool) {
 	_ = this.PropPut(0x00000006, []interface{}{rhs})
 }
 
@@ -113,7 +113,7 @@ func (this *ISWbemDateTime) Hours() int32 {
 	return retVal.LValVal()
 }
 
-func (this *ISWbemDateTime) SetHours(rhs int32)  {
+func (this *ISWbemDateTime) SetHours(rhs int32) {
 	_ = this.PropPut(0x00000007, []interface{}{rhs})
 }
 
@@ -122,7 +122,7 @@ func (this *ISWbemDateTime) HoursSpecified() bool {
 	return retVal.BoolValVal() != win32.VARIANT_FALSE
 }
 
-func (this *ISWbemDateTime) SetHoursSpecified(rhs bool)  {
+func (this *ISWbemDateTime) SetHoursSpecified(rhs bool) {
 	_ = this.PropPut(0x00000008, []interface{}{rhs})
 }
 
@@ -131,7 +131,7 @@ func (this *ISWbemDateTime) Minutes() int32 {
 	return retVal.LValVal()
 }
 
-func (this *ISWbemDateTime) SetMinutes(rhs int32)  {
+func (this *ISWbemDateTime) SetMinutes(rhs int32) {
 	_ = this.PropPut(0x00000009, []interface{}{rhs})
 }
 
@@ -140,7 +140,7 @@ func (this *ISWbemDateTime) MinutesSpecified() bool {
 	return retVal.BoolValVal() != win32.VARIANT_FALSE
 }
 
-func (this *ISWbemDateTime) SetMinutesSpecified(rhs bool)  {
+func (this *ISWbemDateTime) SetMinutesSpecified(rhs bool) {
 	_ = this.PropPut(0x0000000a, []interface{}{rhs})
 }
 
@@ -149,7 +149,7 @@ func (this *ISWbemDateTime) Seconds() int32 {
 	return retVal.LValVal()
 }
 
-func (this *ISWbemDateTime) SetSeconds(rhs int32)  {
+func (this *ISWbemDateTime) SetSeconds(rhs int32) {
 	_ = this.PropPut(0x0000000b, []interface{}{rhs})
 }
 
@@ -158,7 +158,7 @@ func (this *ISWbemDateTime) SecondsSpecified() bool {
 	return retVal.BoolValVal() != win32.VARIANT_FALSE
 }
 
-func (this *ISWbemDateTime) SetSecondsSpecified(rhs bool)  {
+func (this *ISWbemDateTime) SetSecondsSpecified(rhs bool) {
 	_ = this.PropPut(0x0000000c, []interface{}{rhs})
 }
 
@@ -167,7 +167,7 @@ func (this *ISWbemDateTime) Microseconds() int32 {
 	return retVal.LValVal()
 }
 
-func (this *ISWbemDateTime) SetMicroseconds(rhs int32)  {
+func (this *ISWbemDateTime) SetMicroseconds(rhs int32) {
 	_ = this.PropPut(0x0000000d, []interface{}{rhs})
 }
 
@@ -176,7 +176,7 @@ func (this *ISWbemDateTime) MicrosecondsSpecified() bool {
 	return retVal.BoolValVal() != win32.VARIANT_FALSE
 }
 
-func (this *ISWbemDateTime) SetMicrosecondsSpecified(rhs bool)  {
+func (this *ISWbemDateTime) SetMicrosecondsSpecified(rhs bool) {
 	_ = this.PropPut(0x0000000e, []interface{}{rhs})
 }
 
@@ -185,7 +185,7 @@ func (this *ISWbemDateTime) UTC() int32 {
 	return retVal.LValVal()
 }
 
-func (this *ISWbemDateTime) SetUTC(rhs int32)  {
+func (this *ISWbemDateTime) SetUTC(rhs int32) {
 	_ = this.PropPut(0x0000000f, []interface{}{rhs})
 }
 
@@ -194,7 +194,7 @@ func (this *ISWbemDateTime) UTCSpecified() bool {
 	return retVal.BoolValVal() != win32.VARIANT_FALSE
 }
 
-func (this *ISWbemDateTime) SetUTCSpecified(rhs bool)  {
+func (this *ISWbemDateTime) SetUTCSpecified(rhs bool) {
 	_ = this.PropPut(0x00000010, []interface{}{rhs})
 }
 
@@ -203,12 +203,12 @@ func (this *ISWbemDateTime) IsInterval() bool {
 	return retVal.BoolValVal() != win32.VARIANT_FALSE
 }
 
-func (this *ISWbemDateTime) SetIsInterval(rhs bool)  {
+func (this *ISWbemDateTime) SetIsInterval(rhs bool) {
 	_ = this.PropPut(0x00000011, []interface{}{rhs})
 }
 
-var ISWbemDateTime_GetVarDate_OptArgs= []string{
-	"bIsLocal", 
+var ISWbemDateTime_GetVarDate_OptArgs = []string{
+	"bIsLocal",
 }
 
 func (this *ISWbemDateTime) GetVarDate(optArgs ...interface{}) time.Time {
@@ -217,18 +217,18 @@ func (this *ISWbemDateTime) GetVarDate(optArgs ...interface{}) time.Time {
 	return ole.Date(retVal.DateVal()).ToGoTime()
 }
 
-var ISWbemDateTime_SetVarDate_OptArgs= []string{
-	"bIsLocal", 
+var ISWbemDateTime_SetVarDate_OptArgs = []string{
+	"bIsLocal",
 }
 
-func (this *ISWbemDateTime) SetVarDate(dVarDate time.Time, optArgs ...interface{})  {
+func (this *ISWbemDateTime) SetVarDate(dVarDate time.Time, optArgs ...interface{}) {
 	optArgs = ole.ProcessOptArgs(ISWbemDateTime_SetVarDate_OptArgs, optArgs)
 	retVal, _ := this.Call(0x00000013, []interface{}{dVarDate}, optArgs...)
-	_= retVal
+	_ = retVal
 }
 
-var ISWbemDateTime_GetFileTime_OptArgs= []string{
-	"bIsLocal", 
+var ISWbemDateTime_GetFileTime_OptArgs = []string{
+	"bIsLocal",
 }
 
 func (this *ISWbemDateTime) GetFileTime(optArgs ...interface{}) string {
@@ -237,13 +237,13 @@ func (this *ISWbemDateTime) GetFileTime(optArgs ...interface{}) string {
 	return win32.BstrToStrAndFree(retVal.BstrValVal())
 }
 
-var ISWbemDateTime_SetFileTime_OptArgs= []string{
-	"bIsLocal", 
+var ISWbemDateTime_SetFileTime_OptArgs = []string{
+	"bIsLocal",
 }
 
-func (this *ISWbemDateTime) SetFileTime(strFileTime string, optArgs ...interface{})  {
+func (this *ISWbemDateTime) SetFileTime(strFileTime string, optArgs ...interface{}) {
 	optArgs = ole.ProcessOptArgs(ISWbemDateTime_SetFileTime_OptArgs, optArgs)
 	retVal, _ := this.Call(0x00000015, []interface{}{strFileTime}, optArgs...)
-	_= retVal
+	_ = retVal
 }
 

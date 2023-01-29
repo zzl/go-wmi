@@ -1,7 +1,7 @@
 package wmi
 
 import (
-	"github.com/zzl/go-win32api/win32"
+	"github.com/zzl/go-win32api/v2/win32"
 	"github.com/zzl/go-com/com"
 	"github.com/zzl/go-com/ole"
 	"syscall"
@@ -9,7 +9,7 @@ import (
 )
 
 // C93BA292-D955-11D1-8B09-00600806D9B6
-var IID_ISWbemMethodSet = syscall.GUID{0xC93BA292, 0xD955, 0x11D1, 
+var IID_ISWbemMethodSet = syscall.GUID{0xC93BA292, 0xD955, 0x11D1,
 	[8]byte{0x8B, 0x09, 0x00, 0x60, 0x08, 0x06, 0xD9, 0xB6}}
 
 type ISWbemMethodSet struct {
@@ -17,8 +17,8 @@ type ISWbemMethodSet struct {
 }
 
 func NewISWbemMethodSet(pDisp *win32.IDispatch, addRef bool, scoped bool) *ISWbemMethodSet {
-	 if pDisp == nil {
-		return nil;
+	if pDisp == nil {
+		return nil
 	}
 	p := &ISWbemMethodSet{ole.OleClient{pDisp}}
 	if addRef {
@@ -54,7 +54,7 @@ func (this *ISWbemMethodSet) ForEach(action func(item *ISWbemMethod) bool) {
 	pEnum := this.NewEnum_()
 	var pEnumVar *win32.IEnumVARIANT
 	pEnum.QueryInterface(&win32.IID_IEnumVARIANT, unsafe.Pointer(&pEnumVar))
-	defer pEnumVar.Release();
+	defer pEnumVar.Release()
 	for {
 		var c uint32
 		var v ole.Variant
@@ -71,8 +71,8 @@ func (this *ISWbemMethodSet) ForEach(action func(item *ISWbemMethod) bool) {
 	}
 }
 
-var ISWbemMethodSet_Item_OptArgs= []string{
-	"iFlags", 
+var ISWbemMethodSet_Item_OptArgs = []string{
+	"iFlags",
 }
 
 func (this *ISWbemMethodSet) Item(strName string, optArgs ...interface{}) *ISWbemMethod {

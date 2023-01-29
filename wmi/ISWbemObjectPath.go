@@ -1,14 +1,14 @@
 package wmi
 
 import (
-	"github.com/zzl/go-win32api/win32"
+	"github.com/zzl/go-win32api/v2/win32"
 	"github.com/zzl/go-com/com"
 	"github.com/zzl/go-com/ole"
 	"syscall"
 )
 
 // 5791BC27-CE9C-11D1-97BF-0000F81E849C
-var IID_ISWbemObjectPath = syscall.GUID{0x5791BC27, 0xCE9C, 0x11D1, 
+var IID_ISWbemObjectPath = syscall.GUID{0x5791BC27, 0xCE9C, 0x11D1,
 	[8]byte{0x97, 0xBF, 0x00, 0x00, 0xF8, 0x1E, 0x84, 0x9C}}
 
 type ISWbemObjectPath struct {
@@ -16,8 +16,8 @@ type ISWbemObjectPath struct {
 }
 
 func NewISWbemObjectPath(pDisp *win32.IDispatch, addRef bool, scoped bool) *ISWbemObjectPath {
-	 if pDisp == nil {
-		return nil;
+	if pDisp == nil {
+		return nil
 	}
 	p := &ISWbemObjectPath{ole.OleClient{pDisp}}
 	if addRef {
@@ -49,7 +49,7 @@ func (this *ISWbemObjectPath) Path() string {
 	return win32.BstrToStrAndFree(retVal.BstrValVal())
 }
 
-func (this *ISWbemObjectPath) SetPath(rhs string)  {
+func (this *ISWbemObjectPath) SetPath(rhs string) {
 	_ = this.PropPut(0x00000000, []interface{}{rhs})
 }
 
@@ -58,7 +58,7 @@ func (this *ISWbemObjectPath) RelPath() string {
 	return win32.BstrToStrAndFree(retVal.BstrValVal())
 }
 
-func (this *ISWbemObjectPath) SetRelPath(rhs string)  {
+func (this *ISWbemObjectPath) SetRelPath(rhs string) {
 	_ = this.PropPut(0x00000001, []interface{}{rhs})
 }
 
@@ -67,7 +67,7 @@ func (this *ISWbemObjectPath) Server() string {
 	return win32.BstrToStrAndFree(retVal.BstrValVal())
 }
 
-func (this *ISWbemObjectPath) SetServer(rhs string)  {
+func (this *ISWbemObjectPath) SetServer(rhs string) {
 	_ = this.PropPut(0x00000002, []interface{}{rhs})
 }
 
@@ -76,7 +76,7 @@ func (this *ISWbemObjectPath) Namespace() string {
 	return win32.BstrToStrAndFree(retVal.BstrValVal())
 }
 
-func (this *ISWbemObjectPath) SetNamespace(rhs string)  {
+func (this *ISWbemObjectPath) SetNamespace(rhs string) {
 	_ = this.PropPut(0x00000003, []interface{}{rhs})
 }
 
@@ -90,7 +90,7 @@ func (this *ISWbemObjectPath) DisplayName() string {
 	return win32.BstrToStrAndFree(retVal.BstrValVal())
 }
 
-func (this *ISWbemObjectPath) SetDisplayName(rhs string)  {
+func (this *ISWbemObjectPath) SetDisplayName(rhs string) {
 	_ = this.PropPut(0x00000005, []interface{}{rhs})
 }
 
@@ -99,7 +99,7 @@ func (this *ISWbemObjectPath) Class() string {
 	return win32.BstrToStrAndFree(retVal.BstrValVal())
 }
 
-func (this *ISWbemObjectPath) SetClass(rhs string)  {
+func (this *ISWbemObjectPath) SetClass(rhs string) {
 	_ = this.PropPut(0x00000006, []interface{}{rhs})
 }
 
@@ -108,9 +108,9 @@ func (this *ISWbemObjectPath) IsClass() bool {
 	return retVal.BoolValVal() != win32.VARIANT_FALSE
 }
 
-func (this *ISWbemObjectPath) SetAsClass()  {
+func (this *ISWbemObjectPath) SetAsClass() {
 	retVal, _ := this.Call(0x00000008, nil)
-	_= retVal
+	_ = retVal
 }
 
 func (this *ISWbemObjectPath) IsSingleton() bool {
@@ -118,9 +118,9 @@ func (this *ISWbemObjectPath) IsSingleton() bool {
 	return retVal.BoolValVal() != win32.VARIANT_FALSE
 }
 
-func (this *ISWbemObjectPath) SetAsSingleton()  {
+func (this *ISWbemObjectPath) SetAsSingleton() {
 	retVal, _ := this.Call(0x0000000a, nil)
-	_= retVal
+	_ = retVal
 }
 
 func (this *ISWbemObjectPath) Keys() *ISWbemNamedValueSet {
@@ -138,7 +138,7 @@ func (this *ISWbemObjectPath) Locale() string {
 	return win32.BstrToStrAndFree(retVal.BstrValVal())
 }
 
-func (this *ISWbemObjectPath) SetLocale(rhs string)  {
+func (this *ISWbemObjectPath) SetLocale(rhs string) {
 	_ = this.PropPut(0x0000000d, []interface{}{rhs})
 }
 
@@ -147,7 +147,7 @@ func (this *ISWbemObjectPath) Authority() string {
 	return win32.BstrToStrAndFree(retVal.BstrValVal())
 }
 
-func (this *ISWbemObjectPath) SetAuthority(rhs string)  {
+func (this *ISWbemObjectPath) SetAuthority(rhs string) {
 	_ = this.PropPut(0x0000000e, []interface{}{rhs})
 }
 

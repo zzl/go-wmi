@@ -1,7 +1,7 @@
 package wmi
 
 import (
-	"github.com/zzl/go-win32api/win32"
+	"github.com/zzl/go-win32api/v2/win32"
 	"github.com/zzl/go-com/com"
 	"github.com/zzl/go-com/ole"
 	"syscall"
@@ -9,21 +9,21 @@ import (
 )
 
 // 75718CA0-F029-11D1-A1AC-00C04FB6C223
-var IID_ISWbemSinkEvents = syscall.GUID{0x75718CA0, 0xF029, 0x11D1, 
+var IID_ISWbemSinkEvents = syscall.GUID{0x75718CA0, 0xF029, 0x11D1,
 	[8]byte{0xA1, 0xAC, 0x00, 0xC0, 0x4F, 0xB6, 0xC2, 0x23}}
 
 type ISWbemSinkEventsDispInterface interface {
-	OnObjectReady(objWbemObject *ISWbemObject, objWbemAsyncContext *ISWbemNamedValueSet) 
-	OnCompleted(iHResult int32, objWbemErrorObject *ISWbemObject, objWbemAsyncContext *ISWbemNamedValueSet) 
-	OnProgress(iUpperBound int32, iCurrent int32, strMessage string, objWbemAsyncContext *ISWbemNamedValueSet) 
-	OnObjectPut(objWbemObjectPath *ISWbemObjectPath, objWbemAsyncContext *ISWbemNamedValueSet) 
+	OnObjectReady(objWbemObject *ISWbemObject, objWbemAsyncContext *ISWbemNamedValueSet)
+	OnCompleted(iHResult int32, objWbemErrorObject *ISWbemObject, objWbemAsyncContext *ISWbemNamedValueSet)
+	OnProgress(iUpperBound int32, iCurrent int32, strMessage string, objWbemAsyncContext *ISWbemNamedValueSet)
+	OnObjectPut(objWbemObjectPath *ISWbemObjectPath, objWbemAsyncContext *ISWbemNamedValueSet)
 }
 
 type ISWbemSinkEventsHandlers struct {
-	OnObjectReady func(objWbemObject *ISWbemObject, objWbemAsyncContext *ISWbemNamedValueSet) 
-	OnCompleted func(iHResult int32, objWbemErrorObject *ISWbemObject, objWbemAsyncContext *ISWbemNamedValueSet) 
-	OnProgress func(iUpperBound int32, iCurrent int32, strMessage string, objWbemAsyncContext *ISWbemNamedValueSet) 
-	OnObjectPut func(objWbemObjectPath *ISWbemObjectPath, objWbemAsyncContext *ISWbemNamedValueSet) 
+	OnObjectReady func(objWbemObject *ISWbemObject, objWbemAsyncContext *ISWbemNamedValueSet)
+	OnCompleted   func(iHResult int32, objWbemErrorObject *ISWbemObject, objWbemAsyncContext *ISWbemNamedValueSet)
+	OnProgress    func(iUpperBound int32, iCurrent int32, strMessage string, objWbemAsyncContext *ISWbemNamedValueSet)
+	OnObjectPut   func(objWbemObjectPath *ISWbemObjectPath, objWbemAsyncContext *ISWbemNamedValueSet)
 }
 
 type ISWbemSinkEventsDispImpl struct {
@@ -111,7 +111,7 @@ type ISWbemSinkEventsComObj struct {
 
 func NewISWbemSinkEventsComObj(dispImpl ISWbemSinkEventsDispInterface, scoped bool) *ISWbemSinkEventsComObj {
 	comObj := com.NewComObj[ISWbemSinkEventsComObj](
-		&ISWbemSinkEventsImpl {DispImpl: dispImpl})
+		&ISWbemSinkEventsImpl{DispImpl: dispImpl})
 	if scoped {
 		com.AddToScope(comObj)
 	}

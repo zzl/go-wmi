@@ -1,7 +1,7 @@
 package wmi
 
 import (
-	"github.com/zzl/go-win32api/win32"
+	"github.com/zzl/go-win32api/v2/win32"
 	"github.com/zzl/go-com/com"
 	"github.com/zzl/go-com/ole"
 	"syscall"
@@ -9,7 +9,7 @@ import (
 )
 
 // DEA0A7B2-D4BA-11D1-8B09-00600806D9B6
-var IID_ISWbemPropertySet = syscall.GUID{0xDEA0A7B2, 0xD4BA, 0x11D1, 
+var IID_ISWbemPropertySet = syscall.GUID{0xDEA0A7B2, 0xD4BA, 0x11D1,
 	[8]byte{0x8B, 0x09, 0x00, 0x60, 0x08, 0x06, 0xD9, 0xB6}}
 
 type ISWbemPropertySet struct {
@@ -17,8 +17,8 @@ type ISWbemPropertySet struct {
 }
 
 func NewISWbemPropertySet(pDisp *win32.IDispatch, addRef bool, scoped bool) *ISWbemPropertySet {
-	 if pDisp == nil {
-		return nil;
+	if pDisp == nil {
+		return nil
 	}
 	p := &ISWbemPropertySet{ole.OleClient{pDisp}}
 	if addRef {
@@ -54,7 +54,7 @@ func (this *ISWbemPropertySet) ForEach(action func(item *ISWbemProperty) bool) {
 	pEnum := this.NewEnum_()
 	var pEnumVar *win32.IEnumVARIANT
 	pEnum.QueryInterface(&win32.IID_IEnumVARIANT, unsafe.Pointer(&pEnumVar))
-	defer pEnumVar.Release();
+	defer pEnumVar.Release()
 	for {
 		var c uint32
 		var v ole.Variant
@@ -71,8 +71,8 @@ func (this *ISWbemPropertySet) ForEach(action func(item *ISWbemProperty) bool) {
 	}
 }
 
-var ISWbemPropertySet_Item_OptArgs= []string{
-	"iFlags", 
+var ISWbemPropertySet_Item_OptArgs = []string{
+	"iFlags",
 }
 
 func (this *ISWbemPropertySet) Item(strName string, optArgs ...interface{}) *ISWbemProperty {
@@ -86,8 +86,8 @@ func (this *ISWbemPropertySet) Count() int32 {
 	return retVal.LValVal()
 }
 
-var ISWbemPropertySet_Add_OptArgs= []string{
-	"bIsArray", "iFlags", 
+var ISWbemPropertySet_Add_OptArgs = []string{
+	"bIsArray", "iFlags",
 }
 
 func (this *ISWbemPropertySet) Add(strName string, iCimType int32, optArgs ...interface{}) *ISWbemProperty {
@@ -96,13 +96,13 @@ func (this *ISWbemPropertySet) Add(strName string, iCimType int32, optArgs ...in
 	return NewISWbemProperty(retVal.IDispatch(), false, true)
 }
 
-var ISWbemPropertySet_Remove_OptArgs= []string{
-	"iFlags", 
+var ISWbemPropertySet_Remove_OptArgs = []string{
+	"iFlags",
 }
 
-func (this *ISWbemPropertySet) Remove(strName string, optArgs ...interface{})  {
+func (this *ISWbemPropertySet) Remove(strName string, optArgs ...interface{}) {
 	optArgs = ole.ProcessOptArgs(ISWbemPropertySet_Remove_OptArgs, optArgs)
 	retVal, _ := this.Call(0x00000003, []interface{}{strName}, optArgs...)
-	_= retVal
+	_ = retVal
 }
 

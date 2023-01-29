@@ -1,14 +1,14 @@
 package wmi
 
 import (
-	"github.com/zzl/go-win32api/win32"
+	"github.com/zzl/go-win32api/v2/win32"
 	"github.com/zzl/go-com/com"
 	"github.com/zzl/go-com/ole"
 	"syscall"
 )
 
 // D962DB84-D4BB-11D1-8B09-00600806D9B6
-var IID_ISWbemLastError = syscall.GUID{0xD962DB84, 0xD4BB, 0x11D1, 
+var IID_ISWbemLastError = syscall.GUID{0xD962DB84, 0xD4BB, 0x11D1,
 	[8]byte{0x8B, 0x09, 0x00, 0x60, 0x08, 0x06, 0xD9, 0xB6}}
 
 type ISWbemLastError struct {
@@ -16,8 +16,8 @@ type ISWbemLastError struct {
 }
 
 func NewISWbemLastError(pDisp *win32.IDispatch, addRef bool, scoped bool) *ISWbemLastError {
-	 if pDisp == nil {
-		return nil;
+	if pDisp == nil {
+		return nil
 	}
 	p := &ISWbemLastError{ole.OleClient{pDisp}}
 	if addRef {
@@ -44,8 +44,8 @@ func (this *ISWbemLastError) GetIDispatch(addRef bool) *win32.IDispatch {
 	return this.IDispatch
 }
 
-var ISWbemLastError_Put__OptArgs= []string{
-	"iFlags", "objWbemNamedValueSet", 
+var ISWbemLastError_Put__OptArgs = []string{
+	"iFlags", "objWbemNamedValueSet",
 }
 
 func (this *ISWbemLastError) Put_(optArgs ...interface{}) *ISWbemObjectPath {
@@ -54,38 +54,38 @@ func (this *ISWbemLastError) Put_(optArgs ...interface{}) *ISWbemObjectPath {
 	return NewISWbemObjectPath(retVal.IDispatch(), false, true)
 }
 
-var ISWbemLastError_PutAsync__OptArgs= []string{
-	"iFlags", "objWbemNamedValueSet", "objWbemAsyncContext", 
+var ISWbemLastError_PutAsync__OptArgs = []string{
+	"iFlags", "objWbemNamedValueSet", "objWbemAsyncContext",
 }
 
-func (this *ISWbemLastError) PutAsync_(objWbemSink *win32.IDispatch, optArgs ...interface{})  {
+func (this *ISWbemLastError) PutAsync_(objWbemSink *win32.IDispatch, optArgs ...interface{}) {
 	optArgs = ole.ProcessOptArgs(ISWbemLastError_PutAsync__OptArgs, optArgs)
 	retVal, _ := this.Call(0x00000002, []interface{}{objWbemSink}, optArgs...)
-	_= retVal
+	_ = retVal
 }
 
-var ISWbemLastError_Delete__OptArgs= []string{
-	"iFlags", "objWbemNamedValueSet", 
+var ISWbemLastError_Delete__OptArgs = []string{
+	"iFlags", "objWbemNamedValueSet",
 }
 
-func (this *ISWbemLastError) Delete_(optArgs ...interface{})  {
+func (this *ISWbemLastError) Delete_(optArgs ...interface{}) {
 	optArgs = ole.ProcessOptArgs(ISWbemLastError_Delete__OptArgs, optArgs)
 	retVal, _ := this.Call(0x00000003, nil, optArgs...)
-	_= retVal
+	_ = retVal
 }
 
-var ISWbemLastError_DeleteAsync__OptArgs= []string{
-	"iFlags", "objWbemNamedValueSet", "objWbemAsyncContext", 
+var ISWbemLastError_DeleteAsync__OptArgs = []string{
+	"iFlags", "objWbemNamedValueSet", "objWbemAsyncContext",
 }
 
-func (this *ISWbemLastError) DeleteAsync_(objWbemSink *win32.IDispatch, optArgs ...interface{})  {
+func (this *ISWbemLastError) DeleteAsync_(objWbemSink *win32.IDispatch, optArgs ...interface{}) {
 	optArgs = ole.ProcessOptArgs(ISWbemLastError_DeleteAsync__OptArgs, optArgs)
 	retVal, _ := this.Call(0x00000004, []interface{}{objWbemSink}, optArgs...)
-	_= retVal
+	_ = retVal
 }
 
-var ISWbemLastError_Instances__OptArgs= []string{
-	"iFlags", "objWbemNamedValueSet", 
+var ISWbemLastError_Instances__OptArgs = []string{
+	"iFlags", "objWbemNamedValueSet",
 }
 
 func (this *ISWbemLastError) Instances_(optArgs ...interface{}) *ISWbemObjectSet {
@@ -94,18 +94,18 @@ func (this *ISWbemLastError) Instances_(optArgs ...interface{}) *ISWbemObjectSet
 	return NewISWbemObjectSet(retVal.IDispatch(), false, true)
 }
 
-var ISWbemLastError_InstancesAsync__OptArgs= []string{
-	"iFlags", "objWbemNamedValueSet", "objWbemAsyncContext", 
+var ISWbemLastError_InstancesAsync__OptArgs = []string{
+	"iFlags", "objWbemNamedValueSet", "objWbemAsyncContext",
 }
 
-func (this *ISWbemLastError) InstancesAsync_(objWbemSink *win32.IDispatch, optArgs ...interface{})  {
+func (this *ISWbemLastError) InstancesAsync_(objWbemSink *win32.IDispatch, optArgs ...interface{}) {
 	optArgs = ole.ProcessOptArgs(ISWbemLastError_InstancesAsync__OptArgs, optArgs)
 	retVal, _ := this.Call(0x00000006, []interface{}{objWbemSink}, optArgs...)
-	_= retVal
+	_ = retVal
 }
 
-var ISWbemLastError_Subclasses__OptArgs= []string{
-	"iFlags", "objWbemNamedValueSet", 
+var ISWbemLastError_Subclasses__OptArgs = []string{
+	"iFlags", "objWbemNamedValueSet",
 }
 
 func (this *ISWbemLastError) Subclasses_(optArgs ...interface{}) *ISWbemObjectSet {
@@ -114,20 +114,20 @@ func (this *ISWbemLastError) Subclasses_(optArgs ...interface{}) *ISWbemObjectSe
 	return NewISWbemObjectSet(retVal.IDispatch(), false, true)
 }
 
-var ISWbemLastError_SubclassesAsync__OptArgs= []string{
-	"iFlags", "objWbemNamedValueSet", "objWbemAsyncContext", 
+var ISWbemLastError_SubclassesAsync__OptArgs = []string{
+	"iFlags", "objWbemNamedValueSet", "objWbemAsyncContext",
 }
 
-func (this *ISWbemLastError) SubclassesAsync_(objWbemSink *win32.IDispatch, optArgs ...interface{})  {
+func (this *ISWbemLastError) SubclassesAsync_(objWbemSink *win32.IDispatch, optArgs ...interface{}) {
 	optArgs = ole.ProcessOptArgs(ISWbemLastError_SubclassesAsync__OptArgs, optArgs)
 	retVal, _ := this.Call(0x00000008, []interface{}{objWbemSink}, optArgs...)
-	_= retVal
+	_ = retVal
 }
 
-var ISWbemLastError_Associators__OptArgs= []string{
-	"strAssocClass", "strResultClass", "strResultRole", "strRole", 
-	"bClassesOnly", "bSchemaOnly", "strRequiredAssocQualifier", "strRequiredQualifier", 
-	"iFlags", "objWbemNamedValueSet", 
+var ISWbemLastError_Associators__OptArgs = []string{
+	"strAssocClass", "strResultClass", "strResultRole", "strRole",
+	"bClassesOnly", "bSchemaOnly", "strRequiredAssocQualifier", "strRequiredQualifier",
+	"iFlags", "objWbemNamedValueSet",
 }
 
 func (this *ISWbemLastError) Associators_(optArgs ...interface{}) *ISWbemObjectSet {
@@ -136,21 +136,21 @@ func (this *ISWbemLastError) Associators_(optArgs ...interface{}) *ISWbemObjectS
 	return NewISWbemObjectSet(retVal.IDispatch(), false, true)
 }
 
-var ISWbemLastError_AssociatorsAsync__OptArgs= []string{
-	"strAssocClass", "strResultClass", "strResultRole", "strRole", 
-	"bClassesOnly", "bSchemaOnly", "strRequiredAssocQualifier", "strRequiredQualifier", 
-	"iFlags", "objWbemNamedValueSet", "objWbemAsyncContext", 
+var ISWbemLastError_AssociatorsAsync__OptArgs = []string{
+	"strAssocClass", "strResultClass", "strResultRole", "strRole",
+	"bClassesOnly", "bSchemaOnly", "strRequiredAssocQualifier", "strRequiredQualifier",
+	"iFlags", "objWbemNamedValueSet", "objWbemAsyncContext",
 }
 
-func (this *ISWbemLastError) AssociatorsAsync_(objWbemSink *win32.IDispatch, optArgs ...interface{})  {
+func (this *ISWbemLastError) AssociatorsAsync_(objWbemSink *win32.IDispatch, optArgs ...interface{}) {
 	optArgs = ole.ProcessOptArgs(ISWbemLastError_AssociatorsAsync__OptArgs, optArgs)
 	retVal, _ := this.Call(0x0000000a, []interface{}{objWbemSink}, optArgs...)
-	_= retVal
+	_ = retVal
 }
 
-var ISWbemLastError_References__OptArgs= []string{
-	"strResultClass", "strRole", "bClassesOnly", "bSchemaOnly", 
-	"strRequiredQualifier", "iFlags", "objWbemNamedValueSet", 
+var ISWbemLastError_References__OptArgs = []string{
+	"strResultClass", "strRole", "bClassesOnly", "bSchemaOnly",
+	"strRequiredQualifier", "iFlags", "objWbemNamedValueSet",
 }
 
 func (this *ISWbemLastError) References_(optArgs ...interface{}) *ISWbemObjectSet {
@@ -159,19 +159,19 @@ func (this *ISWbemLastError) References_(optArgs ...interface{}) *ISWbemObjectSe
 	return NewISWbemObjectSet(retVal.IDispatch(), false, true)
 }
 
-var ISWbemLastError_ReferencesAsync__OptArgs= []string{
-	"strResultClass", "strRole", "bClassesOnly", "bSchemaOnly", 
-	"strRequiredQualifier", "iFlags", "objWbemNamedValueSet", "objWbemAsyncContext", 
+var ISWbemLastError_ReferencesAsync__OptArgs = []string{
+	"strResultClass", "strRole", "bClassesOnly", "bSchemaOnly",
+	"strRequiredQualifier", "iFlags", "objWbemNamedValueSet", "objWbemAsyncContext",
 }
 
-func (this *ISWbemLastError) ReferencesAsync_(objWbemSink *win32.IDispatch, optArgs ...interface{})  {
+func (this *ISWbemLastError) ReferencesAsync_(objWbemSink *win32.IDispatch, optArgs ...interface{}) {
 	optArgs = ole.ProcessOptArgs(ISWbemLastError_ReferencesAsync__OptArgs, optArgs)
 	retVal, _ := this.Call(0x0000000c, []interface{}{objWbemSink}, optArgs...)
-	_= retVal
+	_ = retVal
 }
 
-var ISWbemLastError_ExecMethod__OptArgs= []string{
-	"objWbemInParameters", "iFlags", "objWbemNamedValueSet", 
+var ISWbemLastError_ExecMethod__OptArgs = []string{
+	"objWbemInParameters", "iFlags", "objWbemNamedValueSet",
 }
 
 func (this *ISWbemLastError) ExecMethod_(strMethodName string, optArgs ...interface{}) *ISWbemObject {
@@ -180,14 +180,14 @@ func (this *ISWbemLastError) ExecMethod_(strMethodName string, optArgs ...interf
 	return NewISWbemObject(retVal.IDispatch(), false, true)
 }
 
-var ISWbemLastError_ExecMethodAsync__OptArgs= []string{
-	"objWbemInParameters", "iFlags", "objWbemNamedValueSet", "objWbemAsyncContext", 
+var ISWbemLastError_ExecMethodAsync__OptArgs = []string{
+	"objWbemInParameters", "iFlags", "objWbemNamedValueSet", "objWbemAsyncContext",
 }
 
-func (this *ISWbemLastError) ExecMethodAsync_(objWbemSink *win32.IDispatch, strMethodName string, optArgs ...interface{})  {
+func (this *ISWbemLastError) ExecMethodAsync_(objWbemSink *win32.IDispatch, strMethodName string, optArgs ...interface{}) {
 	optArgs = ole.ProcessOptArgs(ISWbemLastError_ExecMethodAsync__OptArgs, optArgs)
 	retVal, _ := this.Call(0x0000000e, []interface{}{objWbemSink, strMethodName}, optArgs...)
-	_= retVal
+	_ = retVal
 }
 
 func (this *ISWbemLastError) Clone_() *ISWbemObject {
@@ -195,8 +195,8 @@ func (this *ISWbemLastError) Clone_() *ISWbemObject {
 	return NewISWbemObject(retVal.IDispatch(), false, true)
 }
 
-var ISWbemLastError_GetObjectText__OptArgs= []string{
-	"iFlags", 
+var ISWbemLastError_GetObjectText__OptArgs = []string{
+	"iFlags",
 }
 
 func (this *ISWbemLastError) GetObjectText_(optArgs ...interface{}) string {
@@ -205,8 +205,8 @@ func (this *ISWbemLastError) GetObjectText_(optArgs ...interface{}) string {
 	return win32.BstrToStrAndFree(retVal.BstrValVal())
 }
 
-var ISWbemLastError_SpawnDerivedClass__OptArgs= []string{
-	"iFlags", 
+var ISWbemLastError_SpawnDerivedClass__OptArgs = []string{
+	"iFlags",
 }
 
 func (this *ISWbemLastError) SpawnDerivedClass_(optArgs ...interface{}) *ISWbemObject {
@@ -215,8 +215,8 @@ func (this *ISWbemLastError) SpawnDerivedClass_(optArgs ...interface{}) *ISWbemO
 	return NewISWbemObject(retVal.IDispatch(), false, true)
 }
 
-var ISWbemLastError_SpawnInstance__OptArgs= []string{
-	"iFlags", 
+var ISWbemLastError_SpawnInstance__OptArgs = []string{
+	"iFlags",
 }
 
 func (this *ISWbemLastError) SpawnInstance_(optArgs ...interface{}) *ISWbemObject {
@@ -225,8 +225,8 @@ func (this *ISWbemLastError) SpawnInstance_(optArgs ...interface{}) *ISWbemObjec
 	return NewISWbemObject(retVal.IDispatch(), false, true)
 }
 
-var ISWbemLastError_CompareTo__OptArgs= []string{
-	"iFlags", 
+var ISWbemLastError_CompareTo__OptArgs = []string{
+	"iFlags",
 }
 
 func (this *ISWbemLastError) CompareTo_(objWbemObject *win32.IDispatch, optArgs ...interface{}) bool {

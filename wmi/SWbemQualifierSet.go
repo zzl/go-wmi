@@ -1,14 +1,14 @@
 package wmi
 
 import (
-	"github.com/zzl/go-win32api/win32"
+	"github.com/zzl/go-win32api/v2/win32"
 	"github.com/zzl/go-com/com"
 	"github.com/zzl/go-com/ole"
 	"syscall"
 	"unsafe"
 )
 
-var CLSID_SWbemQualifierSet = syscall.GUID{0x04B83D5E, 0x21AE, 0x11D2, 
+var CLSID_SWbemQualifierSet = syscall.GUID{0x04B83D5E, 0x21AE, 0x11D2,
 	[8]byte{0x8B, 0x33, 0x00, 0x60, 0x08, 0x06, 0xD9, 0xB6}}
 
 type SWbemQualifierSet struct {
@@ -16,8 +16,8 @@ type SWbemQualifierSet struct {
 }
 
 func NewSWbemQualifierSet(pDisp *win32.IDispatch, addRef bool, scoped bool) *SWbemQualifierSet {
-	 if pDisp == nil {
-		return nil;
+	if pDisp == nil {
+		return nil
 	}
 	p := &SWbemQualifierSet{ISWbemQualifierSet{ole.OleClient{pDisp}}}
 	if addRef {
@@ -35,7 +35,7 @@ func NewSWbemQualifierSetFromVar(v ole.Variant, addRef bool, scoped bool) *SWbem
 
 func NewSWbemQualifierSetInstance(scoped bool) (*SWbemQualifierSet, error) {
 	var p *win32.IDispatch
-	hr := win32.CoCreateInstance(&CLSID_SWbemQualifierSet, nil, 
+	hr := win32.CoCreateInstance(&CLSID_SWbemQualifierSet, nil,
 		win32.CLSCTX_INPROC_SERVER|win32.CLSCTX_LOCAL_SERVER,
 		&IID_ISWbemQualifierSet, unsafe.Pointer(&p))
 	if win32.FAILED(hr) {

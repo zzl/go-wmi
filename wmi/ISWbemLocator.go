@@ -1,14 +1,14 @@
 package wmi
 
 import (
-	"github.com/zzl/go-win32api/win32"
+	"github.com/zzl/go-win32api/v2/win32"
 	"github.com/zzl/go-com/com"
 	"github.com/zzl/go-com/ole"
 	"syscall"
 )
 
 // 76A6415B-CB41-11D1-8B02-00600806D9B6
-var IID_ISWbemLocator = syscall.GUID{0x76A6415B, 0xCB41, 0x11D1, 
+var IID_ISWbemLocator = syscall.GUID{0x76A6415B, 0xCB41, 0x11D1,
 	[8]byte{0x8B, 0x02, 0x00, 0x60, 0x08, 0x06, 0xD9, 0xB6}}
 
 type ISWbemLocator struct {
@@ -16,8 +16,8 @@ type ISWbemLocator struct {
 }
 
 func NewISWbemLocator(pDisp *win32.IDispatch, addRef bool, scoped bool) *ISWbemLocator {
-	 if pDisp == nil {
-		return nil;
+	if pDisp == nil {
+		return nil
 	}
 	p := &ISWbemLocator{ole.OleClient{pDisp}}
 	if addRef {
@@ -44,9 +44,9 @@ func (this *ISWbemLocator) GetIDispatch(addRef bool) *win32.IDispatch {
 	return this.IDispatch
 }
 
-var ISWbemLocator_ConnectServer_OptArgs= []string{
-	"strServer", "strNamespace", "strUser", "strPassword", 
-	"strLocale", "strAuthority", "iSecurityFlags", "objWbemNamedValueSet", 
+var ISWbemLocator_ConnectServer_OptArgs = []string{
+	"strServer", "strNamespace", "strUser", "strPassword",
+	"strLocale", "strAuthority", "iSecurityFlags", "objWbemNamedValueSet",
 }
 
 func (this *ISWbemLocator) ConnectServer(optArgs ...interface{}) *ISWbemServices {

@@ -1,14 +1,14 @@
 package wmi
 
 import (
-	"github.com/zzl/go-win32api/win32"
+	"github.com/zzl/go-win32api/v2/win32"
 	"github.com/zzl/go-com/com"
 	"github.com/zzl/go-com/ole"
 	"syscall"
 )
 
 // 27D54D92-0EBE-11D2-8B22-00600806D9B6
-var IID_ISWbemEventSource = syscall.GUID{0x27D54D92, 0x0EBE, 0x11D2, 
+var IID_ISWbemEventSource = syscall.GUID{0x27D54D92, 0x0EBE, 0x11D2,
 	[8]byte{0x8B, 0x22, 0x00, 0x60, 0x08, 0x06, 0xD9, 0xB6}}
 
 type ISWbemEventSource struct {
@@ -16,8 +16,8 @@ type ISWbemEventSource struct {
 }
 
 func NewISWbemEventSource(pDisp *win32.IDispatch, addRef bool, scoped bool) *ISWbemEventSource {
-	 if pDisp == nil {
-		return nil;
+	if pDisp == nil {
+		return nil
 	}
 	p := &ISWbemEventSource{ole.OleClient{pDisp}}
 	if addRef {
@@ -44,8 +44,8 @@ func (this *ISWbemEventSource) GetIDispatch(addRef bool) *win32.IDispatch {
 	return this.IDispatch
 }
 
-var ISWbemEventSource_NextEvent_OptArgs= []string{
-	"iTimeoutMs", 
+var ISWbemEventSource_NextEvent_OptArgs = []string{
+	"iTimeoutMs",
 }
 
 func (this *ISWbemEventSource) NextEvent(optArgs ...interface{}) *ISWbemObject {

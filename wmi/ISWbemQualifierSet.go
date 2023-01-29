@@ -1,7 +1,7 @@
 package wmi
 
 import (
-	"github.com/zzl/go-win32api/win32"
+	"github.com/zzl/go-win32api/v2/win32"
 	"github.com/zzl/go-com/com"
 	"github.com/zzl/go-com/ole"
 	"syscall"
@@ -9,7 +9,7 @@ import (
 )
 
 // 9B16ED16-D3DF-11D1-8B08-00600806D9B6
-var IID_ISWbemQualifierSet = syscall.GUID{0x9B16ED16, 0xD3DF, 0x11D1, 
+var IID_ISWbemQualifierSet = syscall.GUID{0x9B16ED16, 0xD3DF, 0x11D1,
 	[8]byte{0x8B, 0x08, 0x00, 0x60, 0x08, 0x06, 0xD9, 0xB6}}
 
 type ISWbemQualifierSet struct {
@@ -17,8 +17,8 @@ type ISWbemQualifierSet struct {
 }
 
 func NewISWbemQualifierSet(pDisp *win32.IDispatch, addRef bool, scoped bool) *ISWbemQualifierSet {
-	 if pDisp == nil {
-		return nil;
+	if pDisp == nil {
+		return nil
 	}
 	p := &ISWbemQualifierSet{ole.OleClient{pDisp}}
 	if addRef {
@@ -54,7 +54,7 @@ func (this *ISWbemQualifierSet) ForEach(action func(item *ISWbemQualifier) bool)
 	pEnum := this.NewEnum_()
 	var pEnumVar *win32.IEnumVARIANT
 	pEnum.QueryInterface(&win32.IID_IEnumVARIANT, unsafe.Pointer(&pEnumVar))
-	defer pEnumVar.Release();
+	defer pEnumVar.Release()
 	for {
 		var c uint32
 		var v ole.Variant
@@ -71,8 +71,8 @@ func (this *ISWbemQualifierSet) ForEach(action func(item *ISWbemQualifier) bool)
 	}
 }
 
-var ISWbemQualifierSet_Item_OptArgs= []string{
-	"iFlags", 
+var ISWbemQualifierSet_Item_OptArgs = []string{
+	"iFlags",
 }
 
 func (this *ISWbemQualifierSet) Item(name string, optArgs ...interface{}) *ISWbemQualifier {
@@ -86,8 +86,8 @@ func (this *ISWbemQualifierSet) Count() int32 {
 	return retVal.LValVal()
 }
 
-var ISWbemQualifierSet_Add_OptArgs= []string{
-	"bPropagatesToSubclass", "bPropagatesToInstance", "bIsOverridable", "iFlags", 
+var ISWbemQualifierSet_Add_OptArgs = []string{
+	"bPropagatesToSubclass", "bPropagatesToInstance", "bIsOverridable", "iFlags",
 }
 
 func (this *ISWbemQualifierSet) Add(strName string, varVal *ole.Variant, optArgs ...interface{}) *ISWbemQualifier {
@@ -96,13 +96,13 @@ func (this *ISWbemQualifierSet) Add(strName string, varVal *ole.Variant, optArgs
 	return NewISWbemQualifier(retVal.IDispatch(), false, true)
 }
 
-var ISWbemQualifierSet_Remove_OptArgs= []string{
-	"iFlags", 
+var ISWbemQualifierSet_Remove_OptArgs = []string{
+	"iFlags",
 }
 
-func (this *ISWbemQualifierSet) Remove(strName string, optArgs ...interface{})  {
+func (this *ISWbemQualifierSet) Remove(strName string, optArgs ...interface{}) {
 	optArgs = ole.ProcessOptArgs(ISWbemQualifierSet_Remove_OptArgs, optArgs)
 	retVal, _ := this.Call(0x00000003, []interface{}{strName}, optArgs...)
-	_= retVal
+	_ = retVal
 }
 

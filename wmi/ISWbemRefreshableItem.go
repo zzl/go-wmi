@@ -1,14 +1,14 @@
 package wmi
 
 import (
-	"github.com/zzl/go-win32api/win32"
+	"github.com/zzl/go-win32api/v2/win32"
 	"github.com/zzl/go-com/com"
 	"github.com/zzl/go-com/ole"
 	"syscall"
 )
 
 // 5AD4BF92-DAAB-11D3-B38F-00105A1F473A
-var IID_ISWbemRefreshableItem = syscall.GUID{0x5AD4BF92, 0xDAAB, 0x11D3, 
+var IID_ISWbemRefreshableItem = syscall.GUID{0x5AD4BF92, 0xDAAB, 0x11D3,
 	[8]byte{0xB3, 0x8F, 0x00, 0x10, 0x5A, 0x1F, 0x47, 0x3A}}
 
 type ISWbemRefreshableItem struct {
@@ -16,8 +16,8 @@ type ISWbemRefreshableItem struct {
 }
 
 func NewISWbemRefreshableItem(pDisp *win32.IDispatch, addRef bool, scoped bool) *ISWbemRefreshableItem {
-	 if pDisp == nil {
-		return nil;
+	if pDisp == nil {
+		return nil
 	}
 	p := &ISWbemRefreshableItem{ole.OleClient{pDisp}}
 	if addRef {
@@ -69,13 +69,13 @@ func (this *ISWbemRefreshableItem) ObjectSet() *ISWbemObjectSet {
 	return NewISWbemObjectSet(retVal.IDispatch(), false, true)
 }
 
-var ISWbemRefreshableItem_Remove_OptArgs= []string{
-	"iFlags", 
+var ISWbemRefreshableItem_Remove_OptArgs = []string{
+	"iFlags",
 }
 
-func (this *ISWbemRefreshableItem) Remove(optArgs ...interface{})  {
+func (this *ISWbemRefreshableItem) Remove(optArgs ...interface{}) {
 	optArgs = ole.ProcessOptArgs(ISWbemRefreshableItem_Remove_OptArgs, optArgs)
 	retVal, _ := this.Call(0x00000006, nil, optArgs...)
-	_= retVal
+	_ = retVal
 }
 
